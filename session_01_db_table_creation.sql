@@ -1,3 +1,5 @@
+-- ip : 192.168.29.241  username: test01 pass:test@123
+
 -- 1. SQL RDBMS Concepts
 
 -- Relational Database Management System (RDBMS):
