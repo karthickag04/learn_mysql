@@ -1,8 +1,11 @@
 -- ===================================================
 -- 1. Select and Show Database/Tables (Optional Steps)
 -- ===================================================
-USE team01;                  -- Switch to the 'team01' database
+create database team03;
+
+USE team03;                  -- Switch to the 'team01' database
 SHOW TABLES;                 -- Shows tables in 'team01' (may be empty if no tables exist yet)
+
 
 -- If you already have a 'users' table, this DESCRIBE will work; otherwise, it will throw an error.
 DESCRIBE users;             -- Describes the structure of 'users' (if it exists)
@@ -137,14 +140,27 @@ INSERT INTO order_items (order_id, product_id, quantity) VALUES
 SHOW TABLES;
 
 -- Example: Select orders with amount < 200
-SELECT *
-FROM team01.orders
+SELECT * FROM order_items;
+SELECT * FROM  orders;
+SELECT * FROM products;
+SELECT * FROM users;
+
+
+-- Example: into to joins two tables
+SELECT * FROM users u, orders o WHERE u.user_id = o.user_id;
+
+-- Example: into to joins four tables
+SELECT  o.order_id,  p.product_name, oi.quantity, o.amount as offer_price, p.price as actual_price, o.order_date
+ FROM 
+ users u, orders o, order_items oi, products p WHERE u.user_id = o.user_id and o.order_id = oi.order_id and p.product_id = oi.product_id;
+
+
+
+
+SELECT * FROM
+team01.orders
 WHERE amount < 200;
 
--- Example: Cross-table SELECT using old-style comma syntax (Cartesian product if no WHERE)
-SELECT *
-FROM users u, orders o
-WHERE u.user_id = o.user_id;
 
 -- Example: Standard INNER JOIN 
 SELECT *
