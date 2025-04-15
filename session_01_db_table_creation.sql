@@ -16,6 +16,9 @@
 -- Indexes: Used to speed up query processing.
 
 
+-- chat reference link added copy (https://chatgpt.com/share/67fe3fcb-b844-800b-a3ec-9f228792e1da) paste it under new table to check the conversation
+-- https://chatgpt.com/share/67fe3fcb-b844-800b-a3ec-9f228792e1da
+
 -- Creating a database:
 create database aaa;
 
