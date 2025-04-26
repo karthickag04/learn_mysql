@@ -1,9 +1,11 @@
 -- ===================================================
 -- 1. Select and Show Database/Tables (Optional Steps)
 -- ===================================================
-create database team03;
+create database 1a;
+drop database 111a;
 
-USE team03;                  -- Switch to the 'team01' database
+
+USE 1a;                  -- Switch to the 'team01' database
 SHOW TABLES;                 -- Shows tables in 'team01' (may be empty if no tables exist yet)
 
 
@@ -30,7 +32,7 @@ CREATE TABLE IF NOT EXISTS users (
     age INT CHECK (age >= 18),                 -- Must be at least 18
     status VARCHAR(20) DEFAULT 'active',       -- Default status is 'active'
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP  -- Timestamp set automatically
-);
+) ;
 
 -- (Optional) Describe the 'orders' table (will fail if 'orders' doesn’t exist yet)
 DESCRIBE orders;
@@ -39,11 +41,22 @@ DESCRIBE orders;
 -- References 'users(user_id)' for a foreign key
 CREATE TABLE IF NOT EXISTS orders (
     order_id INT PRIMARY KEY AUTO_INCREMENT,     -- Unique ID for each order
-    user_id INT,                                 -- Links to 'users'
-    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- Order creation time
-    amount DECIMAL(10, 2) CHECK (amount > 0),    -- Order amount must be positive
-    FOREIGN KEY (user_id) REFERENCES users(user_id)  -- Enforce user existence
+    user_id INT,           -- Links to 'users'
+	order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- Order creation time
+    amount DECIMAL(10, 2) CHECK (amount > 0),
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
+
+-- alternate way to declare primary key method 2
+CREATE TABLE IF NOT EXISTS orders (
+    order_id INT,                                   -- Unique ID for each order
+    user_id INT,                                    -- Links to 'users'
+    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Order creation time
+    amount DECIMAL(10, 2) CHECK (amount > 0),       -- Order amount must be positive
+    PRIMARY KEY (order_id),                         -- Declared at table level
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
 
 -- Create the 'products' table
 CREATE TABLE IF NOT EXISTS products (
@@ -81,6 +94,8 @@ INSERT INTO users (user_name, password, email, age, status) VALUES
 ('lucas_white',    'lucas_pass',   'lucas@example.com',  26, 'inactive'),
 ('olivia_brown',   'olivia@pass',  'olivia@example.com', 29, 'active'),
 ('ryan_green',     'ryan@2024',    'ryan@example.com',   31, 'active');
+
+select * from users;
 
 -- 3.2 Insert Records into 'orders'
 INSERT INTO orders (user_id, order_date, amount) VALUES
@@ -144,6 +159,22 @@ SELECT * FROM order_items;
 SELECT * FROM  orders;
 SELECT * FROM products;
 SELECT * FROM users;
+
+
+-- Example: into to joins two tables
+select * from users , orders where users.user_id= orders.user_id;
+
+-- Example: into to joins two tables
+select * from users u , orders o where u.user_id= o.user_id;
+
+-- Example: into to joins four tables
+select * from users , orders , order_items, products where users.user_id= orders.user_id and orders.order_id = order_items.order_id and products.product_id = order_items.product_id ;
+
+-- Example: into to joins four tables
+select u.user_id,o.order_id, p.product_name, o.amount as "Purchased amount",p.price as "Actual price",o.order_date, oi.quantity from users u , orders o, order_items oi, products p where u.user_id= o.user_id and o.order_id = oi.order_id and p.product_id = oi.product_id and u.user_id=7;
+
+
+
 
 
 -- Example: into to joins two tables
