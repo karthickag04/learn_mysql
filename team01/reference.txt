@@ -11,3 +11,7 @@ https://chatgpt.com/share/6819eb23-db50-800b-8dbf-1e005097486e
 above conversation part - 2 continued
 https://chatgpt.com/share/681b37f6-748c-800b-a788-e3fe414316d3
 
+
+Cursor usage under mysql
+https://chatgpt.com/share/681b40d4-f960-800b-a2cd-ad7eb59227e4
+
