@@ -244,3 +244,147 @@ call user_order_summary_updated();
 -- Select all rows from the user_order_summary_report table to view the generated reports
 SELECT * FROM user_order_summary_report;
 
+
+
+
+-- example 02 on Cursor with multiple table
+
+select * from orders;
+select * from order_items;
+select * from products;
+select * from products where product_id in(1,3);
+
+
+SELECT SUM(oi.quantity * p.price) as total_cost
+        FROM order_items oi
+        JOIN products p ON oi.product_id = p.product_id
+        WHERE oi.order_id = 1;
+        
+        
+        
+        
+DELIMITER //
+
+CREATE PROCEDURE order_cost_summary()
+BEGIN
+    -- Declare variables
+    DECLARE done INT DEFAULT FALSE;
+    DECLARE oid INT;
+    DECLARE uid INT;
+    DECLARE uname VARCHAR(50);
+    DECLARE total_cost DECIMAL(10,2);
+
+    -- Cursor to go through each order
+    DECLARE order_cursor CURSOR FOR
+        SELECT o.order_id, o.user_id, u.user_name
+        FROM orders o
+        JOIN users u ON o.user_id = u.user_id;
+
+    -- Handler for end of cursor
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+
+    -- Open cursor
+    OPEN order_cursor;
+
+    order_loop: LOOP
+        FETCH order_cursor INTO oid, uid, uname;
+        IF done THEN
+            LEAVE order_loop;
+        END IF;
+
+        -- Calculate total cost of order
+        SELECT SUM(oi.quantity * p.price) INTO total_cost
+        FROM order_items oi
+        JOIN products p ON oi.product_id = p.product_id
+        WHERE oi.order_id = oid;
+
+        -- Display the result
+        SELECT CONCAT('Order ID: ', oid, ' by ', uname, ' costs $', total_cost) AS order_summary;
+    END LOOP;
+
+    -- Close cursor
+    CLOSE order_cursor;
+END //
+
+DELIMITER ;
+
+
+call order_cost_summary();
+
+
+
+
+
+
+
+
+
+
+
+-- example 02a on Cursor with multiple table and report will be stored under summary table
+
+CREATE TABLE IF NOT EXISTS order_cost_summary_report (
+order_id INT,
+user_id INT,
+user_name VARCHAR(50),
+total_cost DECIMAL(10,2),
+generated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+
+DELIMITER //
+
+CREATE PROCEDURE order_cost_summary_updated()
+BEGIN
+-- Declare variables
+DECLARE done INT DEFAULT FALSE;
+DECLARE oid INT;
+DECLARE uid INT;
+DECLARE uname VARCHAR(50);
+DECLARE total_cost DECIMAL(10,2);
+
+-- Cursor to go through each order
+DECLARE order_cursor CURSOR FOR
+    SELECT o.order_id, o.user_id, u.user_name
+    FROM orders o
+    JOIN users u ON o.user_id = u.user_id;
+
+-- Handler for end of cursor
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+
+-- Clear previous report data (optional)
+DELETE FROM order_cost_summary_report;
+
+-- Open cursor
+OPEN order_cursor;
+
+order_loop: LOOP
+    FETCH order_cursor INTO oid, uid, uname;
+    IF done THEN
+        LEAVE order_loop;
+    END IF;
+
+    -- Calculate total cost of order
+    SELECT SUM(oi.quantity * p.price) INTO total_cost
+    FROM order_items oi
+    JOIN products p ON oi.product_id = p.product_id
+    WHERE oi.order_id = oid;
+
+    -- Insert result into report table
+    INSERT INTO order_cost_summary_report (order_id, user_id, user_name, total_cost)
+    VALUES (oid, uid, uname, total_cost);
+END LOOP;
+
+-- Close cursor
+CLOSE order_cursor;
+
+END //
+
+DELIMITER ;
+
+
+call order_cost_summary_updated();
+
+select * from order_cost_summary_report;
+
