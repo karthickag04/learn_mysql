@@ -1,0 +1,55 @@
+🔧 Stored Procedures (5 Tasks)
+
+	sp_GetUserOrderSummary – Return total orders and amount for a specific user
+
+	sp_AddNewProduct – Insert a new product with validation
+
+	sp_UpdateUserStatus – Change status for users meeting specific conditions
+
+	sp_ArchiveOldOrders – Move orders older than a year to an archive table
+
+	sp_ResetInactiveUserStatus – Reset status of users inactive for 6+ months
+
+--------------------
+
+⚡ Triggers (5 Tasks)
+
+	trg_BeforeUserInsert_CheckAge – Prevent users under 18 from being inserted
+
+	trg_AfterOrderInsert_LogOrder – Log order details into an audit table
+
+	trg_BeforeProductUpdate_ValidateStock – Prevent negative stock updates
+
+	trg_BeforeUserInsert_NormalizeUsername – Convert usernames to lowercase
+
+	trg_BeforeOrderDelete_BlockIfItemsExist – Prevent deletion if order has items
+
+
+--------------------
+
+🔍 Views (5 Tasks)
+
+	vw_UserOrderCount – Show each user with total order count and amount
+
+	vw_ProductSalesSummary – Display total quantity sold per product
+
+	vw_ActiveUsersWithOrders – Users who are active and have at least one order
+
+	vw_MonthlySalesByProduct – Monthly sales grouped by product
+
+	vw_UsersWithNoOrders – Users who never placed any order
+
+
+--------------------
+
+🔄 Cursors (5 Tasks)
+
+	csr_IterateOrdersAndApplyDiscount – Apply discount to high-value orders
+
+	csr_UpdateProductStockAfterSales – Deduct stock quantities from product table
+
+	csr_NotifyInactiveUsers – Loop through inactive users to trigger notification
+
+	csr_RecalculateOrderTotals – Recalculate totals if product prices have changed
+
+	csr_UpdateHighDemandProductStock – Increase stock for products with frequent sales
