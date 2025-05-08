@@ -1,0 +1,54 @@
+✅ Stored Procedures (5 Tasks)
+	Get all orders by user ID
+
+	Insert new product
+
+	Update stock after order
+
+	Delete inactive users
+
+	Calculate total sales for a product
+    
+    -------------------
+
+✅ Triggers (5 Tasks)
+
+	Update product stock after new order_item
+
+	Log user status changes
+
+	Prevent order insertion for banned users
+
+	Log deleted users
+
+	Ensure email domain is valid (@example.com)
+    
+    -------------------
+
+✅ Views (5 Tasks)
+
+	Active users
+
+	Order summary with user name
+
+	Low stock products
+
+	Top-selling products
+
+	User order count
+    
+    
+    -------------------
+
+✅ Cursors (5 Tasks)
+
+
+	Apply 10% discount on orders over ₹500
+
+	Print total amount spent by each user
+
+	Update status of users with no orders
+
+	Check for users who ordered same product multiple times
+
+	List all users who bought a specific product
