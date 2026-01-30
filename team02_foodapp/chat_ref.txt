@@ -1,2 +1,11 @@
+local ip for mysql practice
+connection name : use any name
+192.168.29.54
+username : test01
+pass : Test@123p
+port: 3306
+
+food app database name : foodappnew
+
 Chat ref added for exploration of Joins
 https://chatgpt.com/share/697c4000-6e5c-800b-8451-4445bb0546c3
