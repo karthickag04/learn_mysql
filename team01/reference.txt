@@ -15,3 +15,7 @@ https://chatgpt.com/share/681b37f6-748c-800b-a788-e3fe414316d3
 Cursor usage under mysql
 https://chatgpt.com/share/681b40d4-f960-800b-a2cd-ad7eb59227e4
 
+
+cursor and trigger explanation
+https://chatgpt.com/share/698ebe29-adb0-800b-a489-a0348a588ce0
+
