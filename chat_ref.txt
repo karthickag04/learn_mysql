@@ -1,6 +1,9 @@
 chat Ref for table creation for project
 https://chatgpt.com/share/68f873a0-eb00-800b-a7fb-c2e696a26446
 
+chat ref for table creation with multiple project ideas
+https://chatgpt.com/share/6a702954-9bb4-83e8-bb85-b4e9bd6bbc6a
+
 Complete MySQL Keyword Reference chat 
 https://chatgpt.com/share/698b16b8-a040-800b-872d-3936d18ab1ff
 
