@@ -12,6 +12,11 @@ https://chatgpt.com/share/69b00c07-c500-800b-ac43-c6a1bee56935
 
 
 
+MySQL query statements/commands grouped by their query language categories
+https://chatgpt.com/share/6a87e270-66fc-83ee-8e9b-a1ef375bd49a
+
+
+
 School app database creation with tables
 https://chatgpt.com/share/69ba6ed2-81d4-800b-8958-be5d105a7b43
 
